@@ -60,7 +60,7 @@ export default function ReactSearchAutocomplete<T>({
   const callOnSearch = (keyword: string) => {
     let newResults: T[] = []
 
-    keyword?.length > 0 && (newResults = fuseResults(keyword))
+    newResults = keyword?.length > 0 ? fuseResults(keyword) : items;
 
     setResults(newResults)
     onSearch(keyword, newResults)
