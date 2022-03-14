@@ -13,5 +13,5 @@ export interface ResultsProps<T> {
     maxResults: number;
     resultStringKeyName: string;
 }
-export default function Results<T>({ results, onClick, setSearchString, showIcon, maxResults, resultStringKeyName, onHover, formatResult }: ResultsProps<T>): JSX.Element | null;
+export default function Results<T>({ results, onClick, setSearchString, showIcon, maxResults, isFocused, resultStringKeyName, onHover, formatResult }: ResultsProps<T>): JSX.Element | null;
 export {};

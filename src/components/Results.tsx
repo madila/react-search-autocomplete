@@ -21,6 +21,7 @@ export default function Results<T>({
   setSearchString,
   showIcon,
   maxResults,
+  isFocused,
   resultStringKeyName = 'name',
   onHover,
   formatResult
@@ -36,7 +37,7 @@ export default function Results<T>({
     setSearchString(result[resultStringKeyName])
   }
 
-  if (results?.length <= 0) {
+  if (!isFocused) {
     return null
   }
 

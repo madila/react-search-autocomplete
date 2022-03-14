@@ -24,6 +24,7 @@ function Results(_ref) {
       setSearchString = _ref.setSearchString,
       showIcon = _ref.showIcon,
       maxResults = _ref.maxResults,
+      isFocused = _ref.isFocused,
       _ref$resultStringKeyN = _ref.resultStringKeyName,
       resultStringKeyName = _ref$resultStringKeyN === void 0 ? 'name' : _ref$resultStringKeyN,
       onHover = _ref.onHover,
@@ -37,7 +38,7 @@ function Results(_ref) {
     setSearchString(result[resultStringKeyName]);
   };
 
-  if ((results === null || results === void 0 ? void 0 : results.length) <= 0) {
+  if (!isFocused) {
     return null;
   }
 
