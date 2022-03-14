@@ -135,15 +135,18 @@ function ReactSearchAutocomplete(_ref) {
   var handleOnClick = function handleOnClick(result) {
     setResults(items);
     onSelect(result);
+    setIsFocused(true);
   };
 
   var handleOnBlur = function handleOnBlur() {
-    setResults(items);
+    setResults(results.length > 0 ? results : items);
+  };
+
+  var closeOnBlur = function closeOnBlur() {
     setIsFocused(false);
   };
 
   var handleOnFocus = function handleOnFocus() {
-    console.log(results, items);
     setResults(items);
     setIsFocused(true);
   };
@@ -168,6 +171,9 @@ function ReactSearchAutocomplete(_ref) {
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)(StyledReactSearchAutocomplete, {
       children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
         className: "wrapper",
+        tabIndex: 0,
+        onFocus: handleOnFocus,
+        onBlur: closeOnBlur,
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SearchInput.default, {
           searchString: searchString,
           setSearchString: handleSetSearchString,
@@ -182,7 +188,6 @@ function ReactSearchAutocomplete(_ref) {
           results: results,
           onClick: handleOnClick,
           onHover: onHover,
-          onFocus: handleOnFocus,
           isFocused: isFocused,
           setSearchString: setSearchString,
           showIcon: showIcon,

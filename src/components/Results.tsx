@@ -6,7 +6,6 @@ type Item<T> = T & { [key: string]: unknown }
 export interface ResultsProps<T> {
   results: Item<T>[]
   onClick: Function,
-  onFocus: Function,
   onHover: (result: Item<T>) => void
   setSearchString: Function
   formatResult?: Function,
@@ -47,7 +46,6 @@ export default function Results<T>({
       <ul className={'search-autocomplete-results'}>
         {results.slice(0, maxResults).map((result) => (
             result.id && <li
-            tabIndex={0}
             onMouseEnter={() => onHover(result)}
             data-test="result"
             key={`rsa-result-${result.id}`}

@@ -87,15 +87,19 @@ export default function ReactSearchAutocomplete<T>({
   const handleOnClick = (result: T) => {
     setResults(items)
     onSelect(result)
+    setIsFocused(true)
   }
 
   const handleOnBlur = () => {
-    setResults(items)
+    setResults(results.length > 0 ? results : items);
+  }
+
+  const closeOnBlur = () => {
     setIsFocused(false)
   }
 
+
   const handleOnFocus = () => {
-    console.log(results, items);
     setResults(items);
     setIsFocused(true)
   }
@@ -115,7 +119,7 @@ export default function ReactSearchAutocomplete<T>({
   return (
     <ThemeProvider theme={theme}>
       <StyledReactSearchAutocomplete>
-        <div className="wrapper">
+        <div className="wrapper" tabIndex={0} onFocus={handleOnFocus} onBlur={closeOnBlur}>
           <SearchInput
             searchString={searchString}
             setSearchString={handleSetSearchString}
@@ -131,7 +135,6 @@ export default function ReactSearchAutocomplete<T>({
             results={results}
             onClick={handleOnClick}
             onHover={onHover}
-            onFocus={handleOnFocus}
             isFocused={isFocused}
             setSearchString={setSearchString}
             showIcon={showIcon}

@@ -47,7 +47,6 @@ function Results(_ref) {
       className: 'search-autocomplete-results',
       children: results.slice(0, maxResults).map(function (result) {
         return result.id && /*#__PURE__*/(0, _jsxRuntime.jsxs)("li", {
-          tabIndex: 0,
           onMouseEnter: function onMouseEnter() {
             return onHover(result);
           },
