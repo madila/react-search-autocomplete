@@ -135,8 +135,10 @@ function ReactSearchAutocomplete(_ref) {
   };
 
   (0, _react.useEffect)(function () {
+    document.addEventListener('keydown', handleClickOutside);
     document.addEventListener('mousedown', handleClickOutside);
     return function cleanup() {
+      document.removeEventListener('keydown', handleClickOutside);
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);

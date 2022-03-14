@@ -87,8 +87,12 @@ export default function ReactSearchAutocomplete<T>({
 
   useEffect(() => {
     document
+        .addEventListener('keydown', handleClickOutside);
+    document
         .addEventListener('mousedown', handleClickOutside);
     return function cleanup() {
+      document
+          .removeEventListener('keydown', handleClickOutside);
       document
           .removeEventListener('mousedown', handleClickOutside);
     };
