@@ -43,11 +43,10 @@ export default function Results<T>({
 
   return (
     <StyledResults>
-      <div className="line" />
-      <div>
+      <ul>
         {results.slice(0, maxResults).map((result) => (
-          <button
-              type="button"
+          <li
+            tabIndex={0}
             onMouseEnter={() => onHover(result)}
             data-test="result"
             key={`rsa-result-${result.id}`}
@@ -58,9 +57,9 @@ export default function Results<T>({
             <div className="ellipsis" title={result[resultStringKeyName] as string}>
               {formatResultWithKey(result)}
             </div>
-          </button>
+          </li>
         ))}
-      </div>
+      </ul>
     </StyledResults>
   )
 }
