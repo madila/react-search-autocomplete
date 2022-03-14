@@ -96,6 +96,7 @@ export default function ReactSearchAutocomplete<T>({
   }
 
   const handleOnFocus = () => {
+    console.log(results.length, items, results);
     if(results.length < 0) {
       setResults(items);
     }
