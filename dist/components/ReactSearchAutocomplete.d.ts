@@ -22,4 +22,4 @@ export interface ReactSearchAutocompleteProps<T> {
     inputSearchString?: string;
     formatResult?: Function;
 }
-export default function ReactSearchAutocomplete<T>({ items, fuseOptions, inputDebounce, onSearch, onHover, onSelect, onFocus, onClear, showIcon, showClear, maxResults, placeholder, autoFocus, styling, resultStringKeyName, inputSearchString, formatResult }: ReactSearchAutocompleteProps<T>): JSX.Element;
+export default function ReactSearchAutocomplete<T>({ items, fuseOptions, inputDebounce, onSearch, onHover, onSelect, onClear, showIcon, showClear, maxResults, placeholder, autoFocus, styling, resultStringKeyName, inputSearchString, formatResult }: ReactSearchAutocompleteProps<T>): JSX.Element;

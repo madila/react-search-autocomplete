@@ -36,7 +36,6 @@ export default function ReactSearchAutocomplete<T>({
   onSearch = () => {},
   onHover = () => {},
   onSelect = () => {},
-  onFocus = () => {},
   onClear = () => {},
   showIcon = true,
   showClear = true,
