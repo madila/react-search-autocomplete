@@ -109,6 +109,11 @@ function ReactSearchAutocomplete(_ref) {
       results = _useState4[0],
       setResults = _useState4[1];
 
+  var _useState5 = (0, _react.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      isFocused = _useState6[0],
+      setIsFocused = _useState6[1];
+
   var callOnSearch = function callOnSearch(keyword) {
     var newResults = [];
     newResults = (keyword === null || keyword === void 0 ? void 0 : keyword.length) > 0 ? fuseResults(keyword) : items;
@@ -132,6 +137,15 @@ function ReactSearchAutocomplete(_ref) {
   var handleOnClick = function handleOnClick(result) {
     setResults([]);
     onSelect(result);
+  };
+
+  var handleOnBlur = function handleOnBlur() {
+    setResults([]);
+    setIsFocused(false);
+  };
+
+  var handleOnFocus = function handleOnFocus() {
+    setIsFocused(true);
   };
 
   var fuseResults = function fuseResults(keyword) {
@@ -158,10 +172,8 @@ function ReactSearchAutocomplete(_ref) {
           searchString: searchString,
           setSearchString: handleSetSearchString,
           autoFocus: autoFocus,
-          onBlur: function onBlur() {
-            return setResults([]);
-          },
-          onFocus: onFocus,
+          onBlur: handleOnBlur,
+          onFocus: handleOnFocus,
           onClear: onClear,
           placeholder: placeholder,
           showIcon: showIcon,
@@ -170,6 +182,7 @@ function ReactSearchAutocomplete(_ref) {
           results: results,
           onClick: handleOnClick,
           onHover: onHover,
+          isFocused: isFocused,
           setSearchString: setSearchString,
           showIcon: showIcon,
           maxResults: maxResults,

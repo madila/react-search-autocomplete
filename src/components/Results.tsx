@@ -9,7 +9,8 @@ export interface ResultsProps<T> {
   onHover: (result: Item<T>) => void
   setSearchString: Function
   formatResult?: Function
-  showIcon: boolean
+  showIcon: boolean,
+  isFocused: boolean,
   maxResults: number
   resultStringKeyName: string
 }
@@ -42,9 +43,10 @@ export default function Results<T>({
   return (
     <StyledResults>
       <div className="line" />
-      <ul>
+      <div>
         {results.slice(0, maxResults).map((result) => (
-          <li
+          <button
+              type="button"
             onMouseEnter={() => onHover(result)}
             data-test="result"
             key={`rsa-result-${result.id}`}
@@ -55,9 +57,9 @@ export default function Results<T>({
             <div className="ellipsis" title={result[resultStringKeyName] as string}>
               {formatResultWithKey(result)}
             </div>
-          </li>
+          </button>
         ))}
-      </ul>
+      </div>
     </StyledResults>
   )
 }

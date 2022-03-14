@@ -9,6 +9,7 @@ export interface ResultsProps<T> {
     setSearchString: Function;
     formatResult?: Function;
     showIcon: boolean;
+    isFocused: boolean;
     maxResults: number;
     resultStringKeyName: string;
 }
