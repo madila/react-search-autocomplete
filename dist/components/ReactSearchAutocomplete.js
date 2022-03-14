@@ -143,12 +143,8 @@ function ReactSearchAutocomplete(_ref) {
   };
 
   var handleOnFocus = function handleOnFocus() {
-    console.log(results.length, items, results);
-
-    if (results.length < 0) {
-      setResults(items);
-    }
-
+    console.log(results, items);
+    setResults(items);
     setIsFocused(true);
   };
 
