@@ -5,6 +5,7 @@ declare type Item<T> = T & {
 export interface ResultsProps<T> {
     results: Item<T>[];
     onClick: Function;
+    onFocus: Function;
     onHover: (result: Item<T>) => void;
     setSearchString: Function;
     formatResult?: Function;

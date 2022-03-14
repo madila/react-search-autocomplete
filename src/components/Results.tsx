@@ -5,10 +5,11 @@ type Item<T> = T & { [key: string]: unknown }
 
 export interface ResultsProps<T> {
   results: Item<T>[]
-  onClick: Function
+  onClick: Function,
+  onFocus: Function,
   onHover: (result: Item<T>) => void
   setSearchString: Function
-  formatResult?: Function
+  formatResult?: Function,
   showIcon: boolean,
   isFocused: boolean,
   maxResults: number

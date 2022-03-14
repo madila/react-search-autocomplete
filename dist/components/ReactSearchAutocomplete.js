@@ -186,6 +186,7 @@ function ReactSearchAutocomplete(_ref) {
           results: results,
           onClick: handleOnClick,
           onHover: onHover,
+          onFocus: handleOnFocus,
           isFocused: isFocused,
           setSearchString: setSearchString,
           showIcon: showIcon,
