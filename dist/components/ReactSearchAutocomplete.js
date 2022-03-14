@@ -140,11 +140,15 @@ function ReactSearchAutocomplete(_ref) {
   };
 
   var handleOnBlur = function handleOnBlur() {
-    setResults([]);
+    setResults(items);
     setIsFocused(false);
   };
 
   var handleOnFocus = function handleOnFocus() {
+    if (results.length < 0) {
+      setResults(items);
+    }
+
     setIsFocused(true);
   };
 

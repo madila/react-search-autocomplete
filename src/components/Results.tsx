@@ -45,7 +45,7 @@ export default function Results<T>({
     <StyledResults>
       <ul>
         {results.slice(0, maxResults).map((result) => (
-          <li
+            result.id && <li
             tabIndex={0}
             onMouseEnter={() => onHover(result)}
             data-test="result"

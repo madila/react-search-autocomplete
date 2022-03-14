@@ -45,7 +45,7 @@ function Results(_ref) {
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(StyledResults, {
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)("ul", {
       children: results.slice(0, maxResults).map(function (result) {
-        return /*#__PURE__*/(0, _jsxRuntime.jsxs)("li", {
+        return result.id && /*#__PURE__*/(0, _jsxRuntime.jsxs)("li", {
           tabIndex: 0,
           onMouseEnter: function onMouseEnter() {
             return onHover(result);

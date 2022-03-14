@@ -91,11 +91,14 @@ export default function ReactSearchAutocomplete<T>({
   }
 
   const handleOnBlur = () => {
-    setResults([])
+    setResults(items)
     setIsFocused(false)
   }
 
   const handleOnFocus = () => {
+    if(results.length < 0) {
+      setResults(items);
+    }
     setIsFocused(true)
   }
 
