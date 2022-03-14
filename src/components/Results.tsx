@@ -43,7 +43,7 @@ export default function Results<T>({
 
   return (
     <StyledResults>
-      <ul>
+      <ul className={'search-autocomplete-results'}>
         {results.slice(0, maxResults).map((result) => (
             result.id && <li
             tabIndex={0}

@@ -44,6 +44,7 @@ function Results(_ref) {
 
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(StyledResults, {
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)("ul", {
+      className: 'search-autocomplete-results',
       children: results.slice(0, maxResults).map(function (result) {
         return result.id && /*#__PURE__*/(0, _jsxRuntime.jsxs)("li", {
           tabIndex: 0,
