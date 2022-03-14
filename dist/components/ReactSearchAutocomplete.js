@@ -135,7 +135,7 @@ function ReactSearchAutocomplete(_ref) {
   }, [items]);
 
   var handleOnClick = function handleOnClick(result) {
-    setResults([]);
+    setResults(items);
     onSelect(result);
   };
 

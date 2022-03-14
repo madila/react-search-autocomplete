@@ -86,7 +86,7 @@ export default function ReactSearchAutocomplete<T>({
   }, [items])
 
   const handleOnClick = (result: T) => {
-    setResults([])
+    setResults(items)
     onSelect(result)
   }
 
