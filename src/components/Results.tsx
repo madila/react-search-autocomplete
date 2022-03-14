@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { SearchIcon } from './SearchIcon'
+import {useState} from "react";
 
 type Item<T> = T & { [key: string]: unknown }
 
@@ -12,6 +13,7 @@ export interface ResultsProps<T> {
   showIcon: boolean,
   isFocused: boolean,
   maxResults: number
+  setIsFocused: Function,
   resultStringKeyName: string
 }
 
@@ -24,6 +26,7 @@ export default function Results<T>({
   isFocused,
   resultStringKeyName = 'name',
   onHover,
+  setIsFocused,
   formatResult
 }: ResultsProps<T>) {
   type WithStringKeyName = T & Record<string, unknown>
@@ -37,7 +40,7 @@ export default function Results<T>({
     setSearchString(result[resultStringKeyName])
   }
 
-  if (!isFocused) {
+  if(!isFocused) {
     return null
   }
 
@@ -49,6 +52,7 @@ export default function Results<T>({
             onMouseEnter={() => onHover(result)}
             data-test="result"
             key={`rsa-result-${result.id}`}
+            onFocus={() => { setIsFocused(true) }}
             onMouseDown={() => handleClick(result)}
             onClick={() => handleClick(result)}
           >

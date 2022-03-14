@@ -1,5 +1,5 @@
 import { default as Fuse } from 'fuse.js'
-import React, { ChangeEvent, FocusEventHandler, useEffect, useState } from 'react'
+import React, { ChangeEvent, FocusEventHandler, useEffect, useRef, useState } from 'react'
 import styled, { ThemeProvider } from 'styled-components'
 import { defaultFuseOptions, DefaultTheme, defaultTheme } from '../config/config'
 import { debounce } from '../utils/utils'
@@ -44,9 +44,9 @@ export default function ReactSearchAutocomplete<T>({
   autoFocus = false,
   styling = {},
   resultStringKeyName = 'name',
-  inputSearchString = '',
-  formatResult
+  inputSearchString = ''
 }: ReactSearchAutocompleteProps<T>) {
+
   const theme = { ...defaultTheme, ...styling }
   const options = { ...defaultFuseOptions, ...fuseOptions }
 
@@ -57,8 +57,10 @@ export default function ReactSearchAutocomplete<T>({
   const [results, setResults] = useState<any[]>([])
   const [isFocused, setIsFocused] = useState<boolean>(false)
 
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
+
   const callOnSearch = (keyword: string) => {
-    let newResults: T[] = []
+    let newResults: T[]
 
     newResults = keyword?.length > 0 ? fuseResults(keyword) : items;
 
@@ -72,6 +74,25 @@ export default function ReactSearchAutocomplete<T>({
       : (keyword) => callOnSearch(keyword),
     [items]
   )
+
+  const handleClickOutside = (event:any) => {
+    console.log(event, wrapperRef.current);
+    if (
+        wrapperRef.current &&
+        !wrapperRef.current.contains(event.target)
+    ) {
+      setIsFocused(false)
+    }
+  }
+
+  useEffect(() => {
+    document
+        .addEventListener('mousedown', handleClickOutside);
+    return function cleanup() {
+      document
+          .removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [])
 
   useEffect(() => {
     setSearchString(inputSearchString)
@@ -94,14 +115,14 @@ export default function ReactSearchAutocomplete<T>({
     setResults(results.length > 0 ? results : items);
   }
 
-  const closeOnBlur = () => {
-    setIsFocused(false)
+  const handleOnFocus = () => {
+    console.log('focused');
+    setResults(results.length > 0 ? results : items);
+    setIsFocused(true);
   }
 
-
-  const handleOnFocus = () => {
-    setResults(items);
-    setIsFocused(true)
+  const formatResult = (item: any) => {
+    return <button tabIndex={0} type={'button'} aria-label={'Select '+item.name} className='select-result'>{item.name}</button>;
   }
 
   const fuseResults = (keyword: string) =>
@@ -119,7 +140,7 @@ export default function ReactSearchAutocomplete<T>({
   return (
     <ThemeProvider theme={theme}>
       <StyledReactSearchAutocomplete>
-        <div className="wrapper" tabIndex={0} onFocus={handleOnFocus} onBlur={closeOnBlur}>
+        <div className="wrapper" ref={wrapperRef}>
           <SearchInput
             searchString={searchString}
             setSearchString={handleSetSearchString}
@@ -140,6 +161,7 @@ export default function ReactSearchAutocomplete<T>({
             showIcon={showIcon}
             maxResults={maxResults}
             resultStringKeyName={resultStringKeyName}
+            setIsFocused={setIsFocused}
             formatResult={formatResult}
           />
         </div>

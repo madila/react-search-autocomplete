@@ -87,8 +87,7 @@ function ReactSearchAutocomplete(_ref) {
       _ref$resultStringKeyN = _ref.resultStringKeyName,
       resultStringKeyName = _ref$resultStringKeyN === void 0 ? 'name' : _ref$resultStringKeyN,
       _ref$inputSearchStrin = _ref.inputSearchString,
-      inputSearchString = _ref$inputSearchStrin === void 0 ? '' : _ref$inputSearchStrin,
-      formatResult = _ref.formatResult;
+      inputSearchString = _ref$inputSearchStrin === void 0 ? '' : _ref$inputSearchStrin;
 
   var theme = _objectSpread(_objectSpread({}, _config.defaultTheme), styling);
 
@@ -112,8 +111,10 @@ function ReactSearchAutocomplete(_ref) {
       isFocused = _useState6[0],
       setIsFocused = _useState6[1];
 
+  var wrapperRef = (0, _react.useRef)(null);
+
   var callOnSearch = function callOnSearch(keyword) {
-    var newResults = [];
+    var newResults;
     newResults = (keyword === null || keyword === void 0 ? void 0 : keyword.length) > 0 ? fuseResults(keyword) : items;
     setResults(newResults);
     onSearch(keyword, newResults);
@@ -125,6 +126,20 @@ function ReactSearchAutocomplete(_ref) {
     return callOnSearch(keyword);
   }, [items]);
 
+  var handleClickOutside = function handleClickOutside(event) {
+    console.log(event, wrapperRef.current);
+
+    if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+      setIsFocused(false);
+    }
+  };
+
+  (0, _react.useEffect)(function () {
+    document.addEventListener('mousedown', handleClickOutside);
+    return function cleanup() {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
   (0, _react.useEffect)(function () {
     setSearchString(inputSearchString);
   }, [inputSearchString]);
@@ -142,13 +157,20 @@ function ReactSearchAutocomplete(_ref) {
     setResults(results.length > 0 ? results : items);
   };
 
-  var closeOnBlur = function closeOnBlur() {
-    setIsFocused(false);
+  var handleOnFocus = function handleOnFocus() {
+    console.log('focused');
+    setResults(results.length > 0 ? results : items);
+    setIsFocused(true);
   };
 
-  var handleOnFocus = function handleOnFocus() {
-    setResults(items);
-    setIsFocused(true);
+  var formatResult = function formatResult(item) {
+    return /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+      tabIndex: 0,
+      type: 'button',
+      "aria-label": 'Select ' + item.name,
+      className: "select-result",
+      children: item.name
+    });
   };
 
   var fuseResults = function fuseResults(keyword) {
@@ -171,9 +193,7 @@ function ReactSearchAutocomplete(_ref) {
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)(StyledReactSearchAutocomplete, {
       children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
         className: "wrapper",
-        tabIndex: 0,
-        onFocus: handleOnFocus,
-        onBlur: closeOnBlur,
+        ref: wrapperRef,
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SearchInput.default, {
           searchString: searchString,
           setSearchString: handleSetSearchString,
@@ -193,6 +213,7 @@ function ReactSearchAutocomplete(_ref) {
           showIcon: showIcon,
           maxResults: maxResults,
           resultStringKeyName: resultStringKeyName,
+          setIsFocused: setIsFocused,
           formatResult: formatResult
         })]
       })

@@ -28,6 +28,7 @@ function Results(_ref) {
       _ref$resultStringKeyN = _ref.resultStringKeyName,
       resultStringKeyName = _ref$resultStringKeyN === void 0 ? 'name' : _ref$resultStringKeyN,
       onHover = _ref.onHover,
+      setIsFocused = _ref.setIsFocused,
       formatResult = _ref.formatResult;
   var formatResultWithKey = formatResult ? formatResult : function (item) {
     return item[resultStringKeyName];
@@ -51,6 +52,9 @@ function Results(_ref) {
             return onHover(result);
           },
           "data-test": "result",
+          onFocus: function onFocus() {
+            setIsFocused(true);
+          },
           onMouseDown: function onMouseDown() {
             return handleClick(result);
           },
